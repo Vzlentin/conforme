@@ -4,12 +4,12 @@ from typing import Any
 import numpy as np
 import pytest
 
-from calibre.backtest import Forecasts, replay
-from calibre.conformal.calibrators import ACI, Calibrator, Feedback, SplitQuantile, State
-from calibre.conformal.scores import Absolute, Signed
-from calibre.conformal.targets import LeadTime, Step
-from calibre.online import initial_state, step
-from calibre.online.state import flatten, unflatten
+from conforme.backtest import Forecasts, replay
+from conforme.conformal.calibrators import ACI, Calibrator, Feedback, SplitQuantile, State
+from conforme.conformal.scores import Absolute, Signed
+from conforme.conformal.targets import LeadTime, Step
+from conforme.online import initial_state, step
+from conforme.online.state import flatten, unflatten
 
 
 class CensoredCount(Calibrator):

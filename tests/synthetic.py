@@ -3,7 +3,7 @@
 import numpy as np
 import pandas as pd
 
-from calibre.data import Hierarchy, Panel
+from conforme.data import Hierarchy, Panel
 
 
 def make_panel(n_series: int, n_periods: int, seed: int = 0) -> tuple[Panel, Hierarchy]:

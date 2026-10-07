@@ -3,13 +3,13 @@ from typing import Any
 import numpy as np
 import pytest
 
-from calibre.backtest import Forecasts, replay
-from calibre.conformal.calibrators import ACI, Feedback, QuantileTracker, SplitQuantile
-from calibre.conformal.scores import Signed
-from calibre.conformal.targets import Step
-from calibre.decision import critical_ratio
-from calibre.metrics import coverage
-from calibre.online.state import flatten, unflatten
+from conforme.backtest import Forecasts, replay
+from conforme.conformal.calibrators import ACI, Feedback, QuantileTracker, SplitQuantile
+from conforme.conformal.scores import Signed
+from conforme.conformal.targets import Step
+from conforme.decision import critical_ratio
+from conforme.metrics import coverage
+from conforme.online.state import flatten, unflatten
 
 
 def feedback(origin: int, score: float, issued: float, column: int = 0) -> Feedback:

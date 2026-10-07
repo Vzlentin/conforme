@@ -2,11 +2,11 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from calibre.backtest import rolling_forecasts
-from calibre.data import Hierarchy, Panel
-from calibre.forecast import Covariate, Fitted, Forecaster, Window
-from calibre.forecast.models.naive import SeasonalNaive
-from calibre.forecast.reconcile import BottomUp, Identity, WlsStruct
+from conforme.backtest import rolling_forecasts
+from conforme.data import Hierarchy, Panel
+from conforme.forecast import Covariate, Fitted, Forecaster, Window
+from conforme.forecast.models.naive import SeasonalNaive
+from conforme.forecast.reconcile import BottomUp, Identity, WlsStruct
 
 ORIGINS = np.array([3, 5, 8])
 

@@ -5,9 +5,9 @@ from collections.abc import Mapping
 import numpy as np
 import pandas as pd
 
-from calibre.backtest import Forecasts, Replay, replay
-from calibre.conformal import Calibrator, Score, Target
-from calibre.metrics import coverage, interval_score, pinball, width
+from conforme.backtest import Forecasts, Replay, replay
+from conforme.conformal import Calibrator, Score, Target
+from conforme.metrics import coverage, interval_score, pinball, width
 
 
 def compare(

@@ -5,11 +5,11 @@ change code. They define the scope, the array contracts, and the calibration rul
 
 ## Setup
 
-Calibre uses [uv](https://docs.astral.sh/uv/) and Python 3.12.
+Conforme uses [uv](https://docs.astral.sh/uv/) and Python 3.12.
 
 ```sh
-git clone https://github.com/Vzlentin/calibre.git
-cd calibre
+git clone https://github.com/Vzlentin/conforme.git
+cd conforme
 uv sync --group dev
 uvx pre-commit install  # optional, runs the checks below on each commit
 ```
@@ -27,9 +27,9 @@ uv run pytest
 
 ## Layout
 
-- `src/calibre` is the library: forecasting, reconciliation, calibration, decisions, and
+- `src/conforme` is the library: forecasting, reconciliation, calibration, decisions, and
   metrics over arrays. It has no dataset names, column layouts, or benchmark protocols.
-- `bench/` is a folder of scripts for datasets and benchmark comparisons. `calibre` never
+- `bench/` is a folder of scripts for datasets and benchmark comparisons. `conforme` never
   imports from it, and it has no tests.
 - Raw data stays out of Git. Loaders take a directory.
 
@@ -38,7 +38,7 @@ uv run pytest
 - A concept is one module or one package. A contract is an `abc.ABC` with only abstract
   methods, and each implementation subclasses it. No `utils`, `common`, or `helpers`
   modules.
-- A new calibrator is one file in `src/calibre/conformal/calibrators/` that imports only
+- A new calibrator is one file in `src/conforme/conformal/calibrators/` that imports only
   `calibrators.base`, `calibrators.ranks`, and `conformal.losses`. Its state is a nested
   dict of numpy arrays with the node axis kept. See "Write a calibrator" in the README.
 - Hot paths work on typed arrays. Validate inputs once at the boundary.

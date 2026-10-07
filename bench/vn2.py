@@ -16,8 +16,8 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-from calibre.data import Hierarchy, Panel
-from calibre.decision import Settlement, order_up_to, settle
+from conforme.data import Hierarchy, Panel
+from conforme.decision import Settlement, order_up_to, settle
 
 HOLDING = 0.2
 SHORTAGE = 1.0

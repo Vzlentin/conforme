@@ -3,11 +3,11 @@ import pandas as pd
 import pytest
 from neuralforecast.models import MLP
 
-from calibre.backtest import rolling_forecasts
-from calibre.data import Hierarchy, Panel
-from calibre.forecast import Covariate
-from calibre.forecast.models.neuralforecast import NeuralForecast
-from calibre.forecast.reconcile import BottomUp
+from conforme.backtest import rolling_forecasts
+from conforme.data import Hierarchy, Panel
+from conforme.forecast import Covariate
+from conforme.forecast.models.neuralforecast import NeuralForecast
+from conforme.forecast.reconcile import BottomUp
 
 ORIGINS = np.array([30, 35])
 HORIZON = 3

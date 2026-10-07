@@ -1,5 +1,5 @@
 [project]
-name = "libcalibre"
+name = "conforme"
 version = "0.1.0"
 description = "Conformal forecasting: point forecasts, hierarchy reconciliation, and calibrated bands."
 readme = "README.md"
@@ -33,11 +33,11 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/Vzlentin/calibre"
-Repository = "https://github.com/Vzlentin/calibre"
-Issues = "https://github.com/Vzlentin/calibre/issues"
-Documentation = "https://github.com/Vzlentin/calibre/tree/main/docs"
-Changelog = "https://github.com/Vzlentin/calibre/blob/main/CHANGELOG.md"
+Homepage = "https://github.com/Vzlentin/conforme"
+Repository = "https://github.com/Vzlentin/conforme"
+Issues = "https://github.com/Vzlentin/conforme/issues"
+Documentation = "https://github.com/Vzlentin/conforme/tree/main/docs"
+Changelog = "https://github.com/Vzlentin/conforme/blob/main/CHANGELOG.md"
 
 [project.optional-dependencies]
 stats = ["statsforecast"]
@@ -55,9 +55,6 @@ dev = [
     "ty",
 ]
 
-[tool.uv.build-backend]
-# The distribution is libcalibre because PyPI already has calibre; the import name stays calibre.
-module-name = "calibre"
 
 [build-system]
 requires = ["uv_build>=0.12,<0.13"]

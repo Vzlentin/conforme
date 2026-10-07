@@ -1,7 +1,7 @@
 import numpy as np
 import pytest
 
-from calibre.conformal.calibrators.ranks import retained_quantile, score_quantile
+from conforme.conformal.calibrators.ranks import retained_quantile, score_quantile
 
 
 def step_thresholds(resid, rows, level, window=None, groups=None):

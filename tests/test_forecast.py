@@ -4,9 +4,9 @@ import pytest
 from statsforecast.models import SeasonalNaive as SfSeasonalNaive
 from statsforecast.models import SimpleExponentialSmoothing
 
-from calibre.forecast import Covariate, Window
-from calibre.forecast.models.naive import SeasonalNaive
-from calibre.forecast.models.statsforecast import StatsForecastModel
+from conforme.forecast import Covariate, Window
+from conforme.forecast.models.naive import SeasonalNaive
+from conforme.forecast.models.statsforecast import StatsForecastModel
 from tests.synthetic import make_panel
 
 

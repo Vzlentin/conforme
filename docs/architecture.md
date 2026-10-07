@@ -2,7 +2,7 @@
 
 ## Scope
 
-Calibre is an open-source library of array functions for conformal forecasting:
+Conforme is an open-source library of array functions for conformal forecasting:
 validated panel input, point forecasts, hierarchy reconciliation, calibrated bands
 and bounds, and orders from those bounds with their lost-sales cost. [Semantics](semantics.md) defines the calibration rules.
 
@@ -42,7 +42,7 @@ a package, the contract is in `base.py` and each implementation is one file.
 | `decision/lost_sales.py` | `settle`, `Settlement`: one period of lost-sales inventory and its cost |
 | `metrics.py` | coverage, width, interval score, pinball, newsvendor cost |
 
-Each package imports only these Calibre packages.
+Each package imports only these Conforme packages.
 
 | Package | Imports |
 |---|---|
@@ -61,7 +61,7 @@ A calibration method is one file in `conformal/calibrators/`. It imports only
 
 `bench/` is a folder of scripts at the repository root, not a package and not in the
 wheel. Its scripts may name datasets and reproduce benchmark protocols. They import the
-installed `calibre` and each other. `calibre` never imports from `bench/`.
+installed `conforme` and each other. `conforme` never imports from `bench/`.
 
 | Script | Responsibility |
 |---|---|
@@ -72,8 +72,8 @@ installed `calibre` and each other. `calibre` never imports from `bench/`.
 | `bench/vn2_conformal.py` | The VN2 run: forecasts, four calibrators, and the played cost |
 
 Forecast adapters can depend on vendor libraries, but not on calibration.
-Each vendor library is an extra: `libcalibre[stats]`, `libcalibre[ml]`, `libcalibre[neural]`.
-`import calibre` needs none of them.
+Each vendor library is an extra: `conforme[stats]`, `conforme[ml]`, `conforme[neural]`.
+`import conforme` needs none of them.
 
 ## Array contracts
 

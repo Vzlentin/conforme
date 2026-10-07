@@ -1,12 +1,12 @@
 import numpy as np
 import pytest
 
-from calibre.backtest import Forecasts, replay
-from calibre.conformal.calibrators import Feedback, RiskControl, SplitQuantile
-from calibre.conformal.losses import Miss
-from calibre.conformal.scores import Absolute, Signed
-from calibre.conformal.targets import LeadTime
-from calibre.online.state import flatten
+from conforme.backtest import Forecasts, replay
+from conforme.conformal.calibrators import Feedback, RiskControl, SplitQuantile
+from conforme.conformal.losses import Miss
+from conforme.conformal.scores import Absolute, Signed
+from conforme.conformal.targets import LeadTime
+from conforme.online.state import flatten
 
 
 def rows(point: np.ndarray, target: np.ndarray) -> Feedback:

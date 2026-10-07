@@ -9,7 +9,8 @@ import numpy as np
 from statsforecast.models import WindowAverage
 
 import vn2
-from calibre import (
+from compare import compare
+from conforme import (
     ACI,
     BottomUp,
     LeadTime,
@@ -19,8 +20,7 @@ from calibre import (
     critical_ratio,
     rolling_forecasts,
 )
-from calibre.forecast.models.statsforecast import StatsForecastModel
-from compare import compare
+from conforme.forecast.models.statsforecast import StatsForecastModel
 
 data = vn2.load(sys.argv[1])
 hierarchy, n_series = data.hierarchy, len(data.panel.series)

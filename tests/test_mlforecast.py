@@ -4,11 +4,11 @@ import pytest
 from mlforecast.lag_transforms import RollingMean
 from sklearn.linear_model import LinearRegression
 
-from calibre.backtest import rolling_forecasts
-from calibre.data import Hierarchy, Panel
-from calibre.forecast import Covariate
-from calibre.forecast.models.mlforecast import MLForecast
-from calibre.forecast.reconcile import BottomUp
+from conforme.backtest import rolling_forecasts
+from conforme.data import Hierarchy, Panel
+from conforme.forecast import Covariate
+from conforme.forecast.models.mlforecast import MLForecast
+from conforme.forecast.reconcile import BottomUp
 
 ORIGINS = np.array([10, 15])
 

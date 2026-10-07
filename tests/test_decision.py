@@ -1,7 +1,7 @@
 import numpy as np
 import pytest
 
-from calibre.decision import critical_ratio, order_up_to, settle
+from conforme.decision import critical_ratio, order_up_to, settle
 
 
 def test_settle_receives_sells_then_adds_the_order_at_the_end_of_the_pipeline():

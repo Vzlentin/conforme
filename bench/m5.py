@@ -10,8 +10,8 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-from calibre.data import Hierarchy, Panel
-from calibre.forecast import Covariate
+from conforme.data import Hierarchy, Panel
+from conforme.forecast import Covariate
 
 LEVELS = [
     "state_id",

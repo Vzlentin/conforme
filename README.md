@@ -1,28 +1,28 @@
-# Calibre
+# Conforme
 
-[![CI](https://github.com/Vzlentin/calibre/actions/workflows/ci.yml/badge.svg)](https://github.com/Vzlentin/calibre/actions/workflows/ci.yml)
-[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/Vzlentin/calibre/blob/main/LICENSE)
+[![CI](https://github.com/Vzlentin/conforme/actions/workflows/ci.yml/badge.svg)](https://github.com/Vzlentin/conforme/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/Vzlentin/conforme/blob/main/LICENSE)
 ![Python 3.12+](https://img.shields.io/badge/python-3.12%2B-blue.svg)
 
-Calibre is a conformal forecasting library for panels of time series. It makes point
+Conforme is a conformal forecasting library for panels of time series. It makes point
 forecasts at many origins, reconciles them over a hierarchy, and calibrates bands and
 bounds from out-of-sample residuals.
 
 ## Install
 
-The package is `libcalibre` on PyPI, and the import name is `calibre`:
+Install `conforme` from PyPI:
 
 ```sh
-pip install libcalibre
+pip install conforme
 # or
-uv add libcalibre
+uv add conforme
 ```
 
 The vendor model adapters need an extra: `stats` (statsforecast), `ml` (mlforecast), or
 `neural` (neuralforecast).
 
 ```sh
-pip install "libcalibre[stats]"
+pip install "conforme[stats]"
 ```
 
 ## Quick start
@@ -31,9 +31,9 @@ pip install "libcalibre[stats]"
 import numpy as np
 import pandas as pd
 
-from calibre import Absolute, BottomUp, Hierarchy, LeadTime, Panel, SeasonalNaive, Signed
-from calibre import SplitQuantile, Step, replay, rolling_forecasts
-from calibre.metrics import coverage
+from conforme import Absolute, BottomUp, Hierarchy, LeadTime, Panel, SeasonalNaive, Signed
+from conforme import SplitQuantile, Step, replay, rolling_forecasts
+from conforme.metrics import coverage
 
 rng = np.random.default_rng(0)
 series = np.array(["a", "b", "c"])
@@ -59,7 +59,7 @@ Shapes use these axes: B bottom series, T periods, N nodes with bottoms first,
 S forecast series (B for `BottomUp`, N otherwise), O origins, H forecast steps, and
 C target columns (H for `Step`, 1 for `LeadTime`).
 
-![Panel and Hierarchy go to the Forecaster, base forecasts to the Reconciler, points to the Calibrator, bounds to order_up_to and settle](https://raw.githubusercontent.com/Vzlentin/calibre/main/docs/pipeline.png)
+![Panel and Hierarchy go to the Forecaster, base forecasts to the Reconciler, points to the Calibrator, bounds to order_up_to and settle](https://raw.githubusercontent.com/Vzlentin/conforme/main/docs/pipeline.png)
 
 | Stage | Names |
 |---|---|
@@ -67,25 +67,25 @@ C target columns (H for `Step`, 1 for `LeadTime`).
 | Forecast | `Forecaster`, `Reconciler` (`BottomUp`, `Identity`, `WlsStruct`), `rolling_forecasts` |
 | Calibrate | `Target` (`Step`, `LeadTime`), `Score` (`Absolute`, `Signed`), `Loss` (`Miss`), `Calibrator` (`SplitQuantile`, `ACI`, `QuantileTracker`, `RiskControl`), `step`, `replay` |
 | Decide | `critical_ratio`, `order_up_to`, `settle` |
-| Measure | `calibre.metrics`: coverage, width, interval score, pinball, cost |
+| Measure | `conforme.metrics`: coverage, width, interval score, pinball, cost |
 
 Two rules hold everywhere. A model reads only its window, so a later value cannot
 change a point unless a covariate declares it known ahead. A calibrator sees a score
 only once its target is known, and before the origin that knows it issues.
 
-[Architecture](https://github.com/Vzlentin/calibre/blob/main/docs/architecture.md) has the shapes and the modules.
+[Architecture](https://github.com/Vzlentin/conforme/blob/main/docs/architecture.md) has the shapes and the modules.
 
 ## Write a calibrator
 
 A calibrator owns its target, a level or a loss, and is three functions of an explicit
-state. `calibre.online` handles the origins, the delays, and the indexing. A new method
-is one file in `calibre/conformal/calibrators/` that imports only `calibrators.base`,
+state. `conforme.online` handles the origins, the delays, and the indexing. A new method
+is one file in `conforme/conformal/calibrators/` that imports only `calibrators.base`,
 `calibrators.ranks`, and `conformal.losses`. This is the whole of a quantile tracker:
 
 ```python
 import numpy as np
 
-from calibre.conformal.calibrators.base import Calibrator
+from conforme.conformal.calibrators.base import Calibrator
 
 
 class Tracker(Calibrator):
@@ -108,21 +108,21 @@ class Tracker(Calibrator):
 ```
 
 Keep the state in numpy arrays. Then a product can save it after each origin with
-`calibre.online.state.flatten` and continue from it.
+`conforme.online.state.flatten` and continue from it.
 
 ## Models
 
 | Model | Kind | Install |
 |---|---|---|
-| `calibre.forecast.models.naive.SeasonalNaive` | local | core |
-| `calibre.forecast.models.statsforecast.StatsForecastModel` | local, any `statsforecast.models` model | `libcalibre[stats]` |
-| `calibre.forecast.models.mlforecast.MLForecast` | global regressor with lags and covariates | `libcalibre[ml]` |
-| `calibre.forecast.models.neuralforecast.NeuralForecast` | global network from `neuralforecast.models` | `libcalibre[neural]` |
+| `conforme.forecast.models.naive.SeasonalNaive` | local | core |
+| `conforme.forecast.models.statsforecast.StatsForecastModel` | local, any `statsforecast.models` model | `conforme[stats]` |
+| `conforme.forecast.models.mlforecast.MLForecast` | global regressor with lags and covariates | `conforme[ml]` |
+| `conforme.forecast.models.neuralforecast.NeuralForecast` | global network from `neuralforecast.models` | `conforme[neural]` |
 
 ```python
 from lightgbm import LGBMRegressor
-from calibre import BottomUp, Covariate, rolling_forecasts
-from calibre.forecast.models.mlforecast import MLForecast
+from conforme import BottomUp, Covariate, rolling_forecasts
+from conforme.forecast.models.mlforecast import MLForecast
 
 model = MLForecast(
     LGBMRegressor(), lags=[7, 14, 28], features=["price"], fit_periods=365, lookback=84
@@ -143,7 +143,7 @@ run = rolling_forecasts(
 ## Benchmarks
 
 `bench/` is a folder of scripts. They load benchmark data from a directory, run
-benchmark protocols, and compare calibrators. They import the installed `calibre`.
+benchmark protocols, and compare calibrators. They import the installed `conforme`.
 Raw data is not in Git.
 
 | Script | Content |
@@ -160,8 +160,8 @@ uv run python bench/vn2_conformal.py data/vn2
 
 ## Documents
 
-- [Architecture](https://github.com/Vzlentin/calibre/blob/main/docs/architecture.md): modules, array contracts, and costs.
-- [Semantics](https://github.com/Vzlentin/calibre/blob/main/docs/semantics.md): the calibration rules.
+- [Architecture](https://github.com/Vzlentin/conforme/blob/main/docs/architecture.md): modules, array contracts, and costs.
+- [Semantics](https://github.com/Vzlentin/conforme/blob/main/docs/semantics.md): the calibration rules.
 
 ## Development
 
@@ -174,8 +174,8 @@ uv run ty check src/
 uv build --no-sources
 ```
 
-See [Contributing](https://github.com/Vzlentin/calibre/blob/main/CONTRIBUTING.md).
+See [Contributing](https://github.com/Vzlentin/conforme/blob/main/CONTRIBUTING.md).
 
 ## License
 
-[MIT](https://github.com/Vzlentin/calibre/blob/main/LICENSE)
+[MIT](https://github.com/Vzlentin/conforme/blob/main/LICENSE)
